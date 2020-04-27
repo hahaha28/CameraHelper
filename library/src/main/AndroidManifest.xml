@@ -3,7 +3,7 @@
 
     <application>
         <provider
-            android:authorities="fun.inaction.camera.helper.fileprovider"
+            android:authorities="${applicationId}.fun.inaction.camera.helper.fileprovider"
             android:name="androidx.core.content.FileProvider"
             android:exported="false"
             android:grantUriPermissions="true">

@@ -46,9 +46,18 @@ class InvisibleFragment : Fragment() {
         outputFile.createNewFile()
         // 获取Uri
         val fileUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            /**
+             * 为什么这个authority前面要加入那个东西？
+             * 这是为了避免不同的app都使用这个库时，提供器的authority发生冲突
+             * https://stackoverflow.com/questions/16267785/install-shows-error-in-console-install-failed-conflicting-provider
+             * 解决办法是在定义提供器时，前面加入 ${applicationId}
+             * 这样，每一个app会有一个独一无二的authority
+             * 在这里传入参数，前面就加入 packageName ，其实就是applicationId
+             */
+            val authority = "${context!!.packageName}.fun.inaction.camera.helper.fileprovider"
             FileProvider.getUriForFile(
                 context!!,
-                "fun.inaction.camera.helper.fileprovider",
+                authority,
                 outputFile
             )
         } else {
