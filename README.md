@@ -4,8 +4,6 @@ Android 中要调用相机拍照并保存照片相当麻烦，这个库对这个
 
 只需几行代码便可实现。
 
-
-
 ## 导入
 
 [![](https://jitpack.io/v/hahaha28/CameraHelper.svg)](https://jitpack.io/#hahaha28/CameraHelper)
@@ -25,13 +23,13 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.hahaha28:CameraHelper:1.0.0'
+    implementation 'com.github.hahaha28:CameraHelper:1.0.2'
 }
 ```
 
-
-
 ## 使用
+
+* Kotlin 使用
 
 ```kotlin
 // 选择照片的保存位置
@@ -40,12 +38,31 @@ val file = File(externalCacheDir,"img.jpg")
 CameraHelper.takePhoto(activity,file){ success ->
     if(success){
        // 成功
-       // val bitmap = BitmapFactory.decodeStream(FileInputStream(file))
+       // val bitmap = BitmapFactory.decodeFile(file)
        // ...
     }else{
        // 失败
     }
 }
+```
+
+* Java 使用
+
+```java
+// 选择照片的保存位置
+File file = new File("filePath");
+// 拍照
+CameraHelper.takePhoto(activity,file,new CameraHelper.OnReturnListener{
+    @Override
+    public void onReturn(boolean success){
+        if(success){
+            // 成功
+            // Bitmap bitmap = BitmapFactory.decodeFile(file);
+        }else{
+            // 失败
+        }
+    }
+})
 ```
 
 
